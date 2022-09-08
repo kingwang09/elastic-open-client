@@ -1,0 +1,40 @@
+//PUT nori_sample
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "my_analyzer": {
+            "tokenizer": "nori_tokenizer",
+            "filter": [
+              "my_posfilter"
+            ]
+          }
+        },
+        "filter": {
+          "my_posfilter": {
+            "type": "nori_part_of_speech",
+            "stoptags": [
+                "E", "IC", "J",
+                "MAG", "MAJ", "MM",
+                "NA", "NR",
+                "SC", "SE", "SF", "SH", "SL", "SN", "SP",
+                "SSC", "SSO", "SY",
+                "UNA", "UNKNOWN",
+                "VA", "VCN", "VCP", "VSV", "VV", "VX",
+                "XPN", "XR", "XSA", "XSN", "XSV"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+
+//POST http://localhost:9200/nori_sample/_open
+
+//POST nori_sample/_analyze
+{
+  "analyzer": "my_analyzer",
+  "text": "여섯 용이"
+}

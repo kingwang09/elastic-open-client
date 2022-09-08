@@ -1,0 +1,39 @@
+{
+  "settings": {
+    "number_of_shards": 5,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "properties":{
+      "movieCode": { "type": "keyword" },
+      "movieName": { "type": "text" },
+      "playtime": { "type": "integer" },
+      "companies" : {
+        "properties": {
+          "companyCode": { "type": "keyword" },
+          "companyName": { "type": "keyword" }
+        }
+      },
+      "directors": {
+        "properties": {
+          "peopleName": { "type": "keyword" }
+        }
+      },
+      "isDeleted" : { "type": "boolean" },
+      "movieComment" : {
+        "type":"text",
+        "fields": {
+          "movieCommentKeyword": { "type": "keyword" }
+        }
+      },
+      "showDate" : {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "productRange": { "type": "date_range" },
+      "filmLocation": { "type": "geo_point"},
+      "ipAddress": {"type":"ip"},
+      "actors": {"type": "nested"}
+    }
+  }
+}

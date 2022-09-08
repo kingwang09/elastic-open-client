@@ -2,4 +2,4 @@ logging:
   level:
     io.legendcup: DEBUG
     org.springframework: INFO
-    org.springframework.data.elasticsearch.client.WIRE: INFO
+    org.springframework.data.elasticsearch.client.WIRE: TRACE

@@ -8,7 +8,7 @@ import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfig
 
 
 @Configuration
-public class SpringElasticConfig extends AbstractElasticsearchConfiguration {
+public class SpringDataElasticConfig extends AbstractElasticsearchConfiguration {
     @Override
     public RestHighLevelClient elasticsearchClient() {
         ClientConfiguration singleConfiguration = ClientConfiguration.create("localhost:9200");

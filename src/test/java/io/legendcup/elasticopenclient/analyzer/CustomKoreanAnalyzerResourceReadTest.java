@@ -1,6 +1,7 @@
 package io.legendcup.elasticopenclient.analyzer;
 
 import io.legendcup.elasticopenclient.korean.analyzer.CustomKoreanAnalyzer;
+import io.legendcup.elasticopenclient.support.util.TextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ko.KoreanAnalyzer;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @SpringBootTest
@@ -24,11 +26,29 @@ public class CustomKoreanAnalyzerResourceReadTest {
 
     @Test
     public void testCompoundResource() {
-        final String value = "신박한 가방";
+        final String value = "안녕하세요. elasticsearch입니다.";
         String result = this.makeSearchText(customKoreanAnalyzer.makeKoreanAnalyzer(compoundPath), value);
         log.debug("result: {}", result);
         //assertEquals(this.makeSearchText(customKoreanAnalyzer.getKoreanAnalyzer(), value),
         //        this.makeSearchText(customKoreanAnalyzer.makeKoreanAnalyzer(compoundPath), value));
+    }
+
+
+    @Test
+    public void unigramTest(){
+        final String value = "신박한 가방";
+        List<String> results= customKoreanAnalyzer.getUniGramToken(value);
+        for(String v : results){
+            log.debug("result: {}", v);
+        }
+    }
+
+    @Test
+    public void textTest(){
+        final String value ="신박한 가방 ";
+        String result = TextUtil.makeSearchTextLike(value);
+
+        log.debug("result: {}", result);
     }
 
 

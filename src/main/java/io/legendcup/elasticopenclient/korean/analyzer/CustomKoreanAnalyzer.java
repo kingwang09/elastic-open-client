@@ -89,6 +89,7 @@ public class CustomKoreanAnalyzer {
             stopTag.add(Tag.XSA);
             stopTag.add(Tag.XSN);
             stopTag.add(Tag.XSV);
+            stopTag.add(Tag.NNBC);
 
             Reader reader;
             Path path = Paths.get(new ClassPathResource(dicPath).getURI());

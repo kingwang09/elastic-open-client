@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ko.KoreanAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,14 @@ public class CustomKoreanAnalyzerResourceReadTest {
         log.debug("result: {}", result);
         //assertEquals(this.makeSearchText(customKoreanAnalyzer.getKoreanAnalyzer(), value),
         //        this.makeSearchText(customKoreanAnalyzer.makeKoreanAnalyzer(compoundPath), value));
+    }
+
+    @Test
+    public void testWords() {
+        String value = "여러개의 물건";
+        String result = this.makeSearchText(customKoreanAnalyzer.makeKoreanAnalyzer(compoundPath), value);
+        String expected = "물건";
+        Assertions.assertEquals(expected, result);
     }
 
 
@@ -69,6 +78,6 @@ public class CustomKoreanAnalyzerResourceReadTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return result.trim();
     }
 }

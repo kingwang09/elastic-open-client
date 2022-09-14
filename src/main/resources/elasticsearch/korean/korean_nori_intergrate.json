@@ -1,0 +1,46 @@
+//PUT http://localhost:9200/nori_sample
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "my_analyzer": {
+            "tokenizer": "nori_user_dict",
+            "filter": [
+              "my_posfilter"
+            ]
+          }
+        },
+        "filter": {
+          "my_posfilter": {
+            "type": "nori_part_of_speech",
+            "stoptags": [
+              "E", "IC", "J",
+              "MAG", "MAJ", "MM",
+              "NA", "NR", "NNBC",
+              "SC", "SE", "SF", "SH", "SN", "SP",
+              "SSC", "SSO", "SY",
+              "UNA", "UNKNOWN",
+              "VA", "VCN", "VCP", "VSV", "VV", "VX",
+              "XPN", "XR", "XSA", "XSN", "XSV"
+            ]
+          }
+        },
+        "tokenizer": {
+          "nori_user_dict": {
+            "type": "nori_tokenizer",
+            "decompound_mode": "mixed",
+            "discard_punctuation": "false",
+            "user_dictionary": "userdict_ko.txt"
+          }
+        }
+      }
+    }
+  }
+}
+
+//GET nori_sample/_analyze
+{
+  "analyzer": "my_analyzer",
+  "text": "세종시"
+}

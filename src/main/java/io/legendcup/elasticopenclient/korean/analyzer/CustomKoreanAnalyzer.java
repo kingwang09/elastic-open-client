@@ -56,52 +56,54 @@ public class CustomKoreanAnalyzer {
     public KoreanAnalyzer makeKoreanAnalyzer(String dicPath) {
         KoreanAnalyzer koreanAnalyzer = null;
         try {
-            Set<POS.Tag> stopTag = new HashSet<POS.Tag>();
-            stopTag.add(Tag.E);
-            stopTag.add(Tag.IC);
-            stopTag.add(Tag.J);
-            stopTag.add(Tag.MAG);
-            stopTag.add(Tag.MAJ);
-            stopTag.add(Tag.MM);
-            stopTag.add(Tag.NA);
-            stopTag.add(Tag.NR);
-            stopTag.add(Tag.NR);
-            stopTag.add(Tag.SC);
-            stopTag.add(Tag.SE);
-            stopTag.add(Tag.SF);
-            stopTag.add(Tag.SH);
-            stopTag.add(Tag.SL);
-            stopTag.add(Tag.SN);
-            stopTag.add(Tag.SP);
-            stopTag.add(Tag.SSC);
-            stopTag.add(Tag.SSO);
-            stopTag.add(Tag.SY);
-            stopTag.add(Tag.UNA);
-            stopTag.add(Tag.UNKNOWN);
-            stopTag.add(Tag.VA);
-            stopTag.add(Tag.VCN);
-            stopTag.add(Tag.VCP);
-            //stopTag.add(Tag.VCV);
-            stopTag.add(Tag.VV);
-            stopTag.add(Tag.VX);
-            stopTag.add(Tag.XPN);
-            stopTag.add(Tag.XR);
-            stopTag.add(Tag.XSA);
-            stopTag.add(Tag.XSN);
-            stopTag.add(Tag.XSV);
-            stopTag.add(Tag.NNBC);
-
-            Reader reader;
             Path path = Paths.get(new ClassPathResource(dicPath).getURI());
             int count = Files.readAllLines(path).size();
             log.info("compound Dictionary size : " + count);
-            reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+            Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+            Set<POS.Tag> stopTag = findStopTags();
             koreanAnalyzer = new KoreanAnalyzer(UserDictionary.open(reader), KoreanTokenizer.DecompoundMode.DISCARD, stopTag, false);
 
         } catch (Exception e) {
             log.info("analyzer setting fail");
         }
         return koreanAnalyzer;
+    }
+
+    private Set<POS.Tag> findStopTags(){
+        Set<POS.Tag> stopTag = new HashSet<POS.Tag>();
+        stopTag.add(Tag.E);
+        stopTag.add(Tag.IC);
+        stopTag.add(Tag.J);
+        stopTag.add(Tag.MAG);
+        stopTag.add(Tag.MAJ);
+        stopTag.add(Tag.MM);
+        stopTag.add(Tag.NA);
+        stopTag.add(Tag.NR);
+        stopTag.add(Tag.SC);
+        stopTag.add(Tag.SE);
+        stopTag.add(Tag.SF);
+        stopTag.add(Tag.SH);
+        stopTag.add(Tag.SL);
+        stopTag.add(Tag.SN);
+        stopTag.add(Tag.SP);
+        stopTag.add(Tag.SSC);
+        stopTag.add(Tag.SSO);
+        stopTag.add(Tag.SY);
+        stopTag.add(Tag.UNA);
+        stopTag.add(Tag.UNKNOWN);
+        stopTag.add(Tag.VA);
+        stopTag.add(Tag.VCN);
+        stopTag.add(Tag.VCP);
+        //stopTag.add(Tag.VCV);
+        stopTag.add(Tag.VV);
+        stopTag.add(Tag.VX);
+        stopTag.add(Tag.XPN);
+        stopTag.add(Tag.XR);
+        stopTag.add(Tag.XSA);
+        stopTag.add(Tag.XSN);
+        stopTag.add(Tag.XSV);
+        stopTag.add(Tag.NNBC);
+        return stopTag;
     }
 
     public SetMultimap<String, String> makeSynonym(String synonymPath) {
@@ -128,22 +130,11 @@ public class CustomKoreanAnalyzer {
     private KoreanAnalyzer makeKoreanAnalyzer(Resource dictionaryResource) {
         KoreanAnalyzer koreanAnalyzer = null;
         try {
-            Set<POS.Tag> stopTag = new HashSet<POS.Tag>();
-            stopTag.add(Tag.E);
-            stopTag.add(Tag.IC);
-            stopTag.add(Tag.J);
-            stopTag.add(Tag.MAG);
-            stopTag.add(Tag.MAJ);
-            stopTag.add(Tag.SC);
-            stopTag.add(Tag.SE);
-            stopTag.add(Tag.SF);
-            stopTag.add(Tag.SP);
-
             int count = ResourceReader.asList(dictionaryResource).size();
             log.info("Resource compound Dictionary size : " + count);
             Reader reader = new InputStreamReader(dictionaryResource.getInputStream(), StandardCharsets.UTF_8);
+            Set<POS.Tag> stopTag = findStopTags();
             koreanAnalyzer = new KoreanAnalyzer(UserDictionary.open(reader), KoreanTokenizer.DecompoundMode.DISCARD, stopTag, false);
-
         } catch (Exception e) {
             e.printStackTrace();
             log.info("analyzer setting fail");
@@ -205,6 +196,7 @@ public class CustomKoreanAnalyzer {
         List<String> uniGramTokens = this.getUniGramToken(TextUtil.makeSearchTextLike(text));
         return uniGramTokens.stream().collect(Collectors.joining(" "));
     }
+
     public List<String> getUniGramToken(String text) {
         List<String> list = new ArrayList<String>();
         try {

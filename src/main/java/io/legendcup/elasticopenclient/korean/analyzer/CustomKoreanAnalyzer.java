@@ -77,6 +77,8 @@ public class CustomKoreanAnalyzer {
         if (value == null) {
             return new ArrayList<>();
         }
+        log.debug("start korean text..");
+        long start = System.currentTimeMillis();
         List<String> result = new LinkedList<>();
         try {
             TokenStream tokenStream = this.koreanAnalyzer.tokenStream("result", value);
@@ -99,6 +101,8 @@ public class CustomKoreanAnalyzer {
         } catch (IOException e) {
             log.error("token error: {}", e.getMessage(), e);
         }
+        long end = System.currentTimeMillis();
+        log.debug("end korean text: {}ms", (end-start));
         return result;
     }
 }

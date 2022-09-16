@@ -14,7 +14,9 @@ public class CustomKoreanAnalyzerPool extends BasePoolableObjectFactory<CustomKo
 
     @Override
     public CustomKoreanAnalyzer makeObject() throws Exception {
-        return new CustomKoreanAnalyzer(compoundPath);
+        CustomKoreanAnalyzer result = new CustomKoreanAnalyzer(compoundPath);
+        log.debug("make object: {}", result);
+        return result;
     }
 
 

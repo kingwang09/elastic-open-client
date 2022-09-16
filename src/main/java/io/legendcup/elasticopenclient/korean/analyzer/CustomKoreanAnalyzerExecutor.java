@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -20,13 +21,22 @@ public class CustomKoreanAnalyzerExecutor {
     @PostConstruct
     public void init(){
         log.debug("Analyzer executor dic path: {}", compoundPath);
-        genericObjectPool = new GenericObjectPool(new CustomKoreanAnalyzerPool(compoundPath), 10);
+        genericObjectPool = new GenericObjectPool(new CustomKoreanAnalyzerPool(compoundPath), 50);
     }
 
-    public List<String> getText(String keyword) throws Exception {
-        CustomKoreanAnalyzer customKoreanAnalyzer = genericObjectPool.borrowObject();
-        List<String> result = customKoreanAnalyzer.getSearchTextList(keyword);
-        genericObjectPool.returnObject(customKoreanAnalyzer);
+    public List<String> getText(String keyword) {
+        List<String> result = new ArrayList<>();
+        try {
+            CustomKoreanAnalyzer customKoreanAnalyzer = genericObjectPool.borrowObject();
+            result = customKoreanAnalyzer.getSearchTextList(keyword);
+            genericObjectPool.returnObject(customKoreanAnalyzer);
+        } catch (Exception e) {
+            log.error("executor error: {}",e.getMessage(), e);
+        }
+
+        
+        
+
         return result;
     }
 }

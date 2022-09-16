@@ -1,3 +1,5 @@
+server:
+  port: 9090
 analyzer:
   compound-path: dictionary.dic
   compound-classpath: classpath:dictionary.dic

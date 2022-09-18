@@ -32,13 +32,13 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	//elastic client
-//	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.6'
-//	implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.17.6'
-//	implementation 'org.elasticsearch:elasticsearch:7.17.6'
+	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.6'
+	implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.17.6'
+	implementation 'org.elasticsearch:elasticsearch:7.17.6'
 
-	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.4.0'
-	implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.4.0'
-	implementation 'org.elasticsearch:elasticsearch:7.4.0'
+	//implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.4.0'
+	//implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.4.0'
+	//implementation 'org.elasticsearch:elasticsearch:7.4.0'
 
 	//lucen
 	implementation group: 'org.apache.lucene', name: 'lucene-analyzers-nori', version: '7.7.2'

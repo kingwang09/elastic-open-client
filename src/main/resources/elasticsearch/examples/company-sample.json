@@ -1,0 +1,78 @@
+{
+  "mappings": {
+    "properties":{
+      "name": { "type": "text" },
+      "tradeName": { "type": "text" },
+      "englishName": { "type": "text" },
+
+      "category": { "type": "keyword" },
+      "scale": { "type": "keyword" },
+      "graduateDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "shapeCode": { "type": "keyword" },
+      "foundationShape": { "type": "keyword" },
+      "status": { "type": "keyword" },
+      "statusChangeDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "publicInstitutionDivision": { "type": "keyword" },
+      "ventureDivision": { "type": "keyword" },
+      "shapePosition": { "type": "keyword" },
+      "recentSectorsCode": { "type": "keyword" },
+      "financialSectorsCode": { "type": "keyword" },
+      "groupCode": { "type": "keyword" },
+      "groupName": { "type": "text" },
+      "businessId": { "type": "keyword" },
+      "openDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "openCode": { "type": "keyword" },
+      "tradeId": { "type": "keyword" },
+      "stockOpenDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "stockCloseDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "primaryBankCode": { "type": "keyword" },
+      "primaryBankName": { "type": "text" },
+      "accountCode": { "type": "keyword" },
+      "accountName": { "type": "text" },
+      "settlementDate": {
+        "type": "date",
+        "format": "MMdd"
+      },
+      "homepageUrl": { "type": "text" },
+      "email": { "type": "text" },
+      "updateDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "businessNumber": { "type": "keyword" },
+      "officeCode": { "type": "keyword" },
+      "officeAddress": { "type": "text" },
+      "officeAddressDetail": { "type": "text" },
+      "poneNumber": { "type": "keyword" },
+      "faxNumber": { "type": "keyword" },
+      "workerCount": { "type": "integer" },
+      "productName": { "type": "text" },
+      "sectorsCode": { "type": "keyword" },
+      "relatedId": { "type": "keyword" },
+      "relatedOpenDate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "officeRoadCode": { "type": "keyword" },
+      "officeRoadAddress": { "type": "text" },
+      "officeRoadAddressDetail": { "type": "text" },
+      "isRoadAddress": { "type": "keyword" },
+      "isCheckedAddress": { "type": "keyword" }
+    }
+  }
+}

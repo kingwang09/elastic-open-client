@@ -5,6 +5,17 @@ analyzer:
   compound-classpath: classpath:dictionary.dic
   synonyms-path: synonym.dic
   synonyms-classpath: classpath:synonym.dic
+spring:
+  batch:
+    job:
+      enabled: true
+batch:
+  csv:
+    reader:
+      path: "/Users/hyungeun.jin/Documents/csv/company.txt"
+    writer:
+      path: "/Users/hyungeun.jin/Documents/csv/company_out.txt"
+  chunk-size: 1000
 logging:
   level:
     io.legendcup: DEBUG

@@ -89,6 +89,7 @@ public class SampleCompany {
     private String isCheckedAddress;
     
     public SampleCompany(RawSampleCompany rawSampleCompany){
+        this.id = rawSampleCompany.getId();
         this.name = getValue(rawSampleCompany.getName());
         this.tradeName = getValue(rawSampleCompany.getTradeName());
         this.englishName = getValue(rawSampleCompany.getEnglishName());

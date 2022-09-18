@@ -1,12 +1,17 @@
 package io.legendcup.elasticopenclient.batch.model;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Dynamic;
 
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+@Slf4j
 @ToString
 @Getter
 @Builder
@@ -97,13 +102,13 @@ public class SampleCompany {
         this.category = getValue(rawSampleCompany.getCategory());
         this.scale = getValue(rawSampleCompany.getScale());
         
-        this.graduateDate = getValue(rawSampleCompany.getGraduateDate());
+        this.graduateDate = getDateString(rawSampleCompany.getGraduateDate(), "yyyyMMdd");
         
         this.shapeCode = getValue(rawSampleCompany.getShapeCode());
         
         this.foundationShape = getValue(rawSampleCompany.getFoundationShape());
         this.status = getValue(rawSampleCompany.getStatus());
-        this.statusChangeDate = getValue(rawSampleCompany.getStatusChangeDate());
+        this.statusChangeDate = getDateString(rawSampleCompany.getStatusChangeDate(),"yyyyMMdd");
         
         this.publicInstitutionDivision = getValue(rawSampleCompany.getPublicInstitutionDivision());
         
@@ -116,12 +121,12 @@ public class SampleCompany {
 
         this.businessId = getValue(rawSampleCompany.getBusinessId());
 
-        this.openDate = getValue(rawSampleCompany.getOpenDate());
+        this.openDate = getDateString(rawSampleCompany.getOpenDate(), "yyyyMMdd");
         this.openCode = getValue(rawSampleCompany.getOpenCode());
 
         this.tradeId = getValue(rawSampleCompany.getTradeId());
-        this.stockOpenDate = getValue(rawSampleCompany.getStockOpenDate());
-        this.stockCloseDate = getValue(rawSampleCompany.getStockCloseDate());
+        this.stockOpenDate = getDateString(rawSampleCompany.getStockOpenDate(), "yyyyMMdd");
+        this.stockCloseDate = getDateString(rawSampleCompany.getStockCloseDate(), "yyyyMMdd");
 
         this.primaryBankCode = getValue(rawSampleCompany.getPrimaryBankCode());
         this.primaryBankName = getValue(rawSampleCompany.getPrimaryBankName());
@@ -129,12 +134,12 @@ public class SampleCompany {
         this.accountCode = getValue(rawSampleCompany.getAccountCode());
         this.accountName = getValue(rawSampleCompany.getAccountName());
 
-        this.settlementDate = getValue(rawSampleCompany.getSettlementDate());
+        this.settlementDate = getDateString(rawSampleCompany.getSettlementDate(), "yyyyMMdd");
 
         this.homepageUrl = getValue(rawSampleCompany.getHomepageUrl());
 
         this.email = getValue(rawSampleCompany.getEmail());
-        this.updateDate = getValue(rawSampleCompany.getUpdateDate());
+        this.updateDate = getDateString(rawSampleCompany.getUpdateDate(), "yyyyMMdd");
         this.businessNumber = getValue(rawSampleCompany.getBusinessNumber());
         this.officeCode = getValue(rawSampleCompany.getOfficeCode());
         this.officeAddress = getValue(rawSampleCompany.getOfficeAddress());
@@ -150,7 +155,7 @@ public class SampleCompany {
         this.sectorsCode = getValue(rawSampleCompany.getSectorsCode());
 
         this.relatedId = getValue(rawSampleCompany.getRelatedId());
-        this.relatedOpenDate = getValue(rawSampleCompany.getRelatedOpenDate());
+        this.relatedOpenDate = getDateString(rawSampleCompany.getRelatedOpenDate(), "yyyyMMdd");
 
         this.officeRoadCode = getValue(rawSampleCompany.getOfficeRoadCode());
         this.officeRoadAddress = getValue(rawSampleCompany.getOfficeRoadAddress());
@@ -164,5 +169,21 @@ public class SampleCompany {
             return null;
         }
         return StringUtils.trim(value);
+    }
+
+    /**
+     * Date 날짜 처리 필요
+     */
+    public String getDateString(String value, String format){
+        if(value == null || value.isEmpty()){
+            return null;
+        }
+        try {
+            LocalDate.parse(value, DateTimeFormatter.ofPattern(format));
+            return value;
+        }catch(Exception ex){
+            log.warn("date parsing error id={}, date={}", this.id, value);
+        }
+        return null;
     }
 }

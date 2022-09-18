@@ -1,7 +1,9 @@
 package io.legendcup.elasticopenclient.batch.config;
 
 import io.legendcup.elasticopenclient.batch.model.RawSampleCompany;
+import io.legendcup.elasticopenclient.batch.model.SampleCompany;
 import io.legendcup.elasticopenclient.batch.processor.CsvProcessor;
+import io.legendcup.elasticopenclient.batch.writer.ElasticWriter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -49,11 +51,12 @@ public class CsvJobConfig {
     @Bean
     public Step companyStep(){
         return stepBuilderFactory.get("companyStep")
-                .<RawSampleCompany,RawSampleCompany>chunk(chunkSize)
+                .<RawSampleCompany,SampleCompany>chunk(chunkSize)
                 .reader(csvFileReader())
                 .processor(csvProcessor())
                 //.writer(csvFileWriter())
-                .writer(logWriter())
+                //.writer(logWriter())
+                .writer(elasticWriter())
                 .build();
     }
 
@@ -112,5 +115,10 @@ public class CsvJobConfig {
                 log.info("complete log={}", result);
             }
         };
+    }
+
+    @Bean
+    public ItemWriter<SampleCompany> elasticWriter(){
+        return new ElasticWriter();
     }
 }

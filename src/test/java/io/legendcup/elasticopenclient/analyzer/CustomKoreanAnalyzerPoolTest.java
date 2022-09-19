@@ -1,11 +1,8 @@
 package io.legendcup.elasticopenclient.analyzer;
 
-import io.legendcup.elasticopenclient.korean.analyzer.CustomKoreanAnalyzerExecutor;
-import io.legendcup.elasticopenclient.korean.analyzer.CustomKoreanAnalyzerPool;
+import io.legendcup.elasticopenclient.korean.analyzer.pool.CustomKoreanAnalyzerExecutor;
 import io.legendcup.elasticopenclient.korean.analyzer.original.OriginalCustomKoreanAnalyzer;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.pool.impl.GenericObjectPool;
-import org.apache.lucene.analysis.ko.KoreanAnalyzer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

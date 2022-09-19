@@ -1,5 +1,6 @@
-package io.legendcup.elasticopenclient.korean.analyzer;
+package io.legendcup.elasticopenclient.korean.analyzer.pool;
 
+import io.legendcup.elasticopenclient.korean.analyzer.CustomKoreanAnalyzer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.springframework.beans.factory.annotation.Value;

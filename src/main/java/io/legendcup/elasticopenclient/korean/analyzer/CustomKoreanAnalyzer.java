@@ -105,4 +105,12 @@ public class CustomKoreanAnalyzer {
         log.debug("end korean text: {}ms", (end-start));
         return result;
     }
+
+    public void close(){
+        try {
+            koreanAnalyzer.close();
+        }catch (Exception ex){
+            log.error("custom korean analyzer close fail..{}", ex.getMessage(), ex);
+        }
+    }
 }

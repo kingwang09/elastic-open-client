@@ -8,7 +8,7 @@ analyzer:
 spring:
   batch:
     job:
-      enabled: true
+      enabled: false
 batch:
   csv:
     reader:

@@ -32,17 +32,21 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	//elastic client
+	//spring-data를 쓰려면 최신 버전을 써야함.
 	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.6'
 	implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.17.6'
 	implementation 'org.elasticsearch:elasticsearch:7.17.6'
-
-	//implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.4.0'
-	//implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.4.0'
-	//implementation 'org.elasticsearch:elasticsearch:7.4.0'
-
-	//lucen
-	implementation group: 'org.apache.lucene', name: 'lucene-analyzers-nori', version: '7.7.2'
+	implementation group: 'org.apache.lucene', name: 'lucene-analyzers-nori', version: '8.11.2'
 	implementation group: 'org.apache.lucene', name: 'lucene-core'
+
+	//elatic nori가 아래 버전만 인식함.
+//	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.4.0'
+//	implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.4.0'
+//	implementation 'org.elasticsearch:elasticsearch:7.4.0'
+//	//lucen
+//	implementation group: 'org.apache.lucene', name: 'lucene-analyzers-nori', version: '7.7.2'
+//	implementation group: 'org.apache.lucene', name: 'lucene-core'
+
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 	implementation "commons-io:commons-io:2.4"
 	implementation "com.google.guava:guava:18.0"

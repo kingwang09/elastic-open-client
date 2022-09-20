@@ -4,6 +4,7 @@ import io.legendcup.elasticopenclient.korean.analyzer.pool.CustomKoreanAnalyzerE
 import io.legendcup.elasticopenclient.korean.analyzer.original.OriginalCustomKoreanAnalyzer;
 import io.legendcup.elasticopenclient.korean.analyzer.pool2.CustomKoreanAnalyzerUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/korean")
@@ -33,6 +35,8 @@ public class KoreanAnalyzerRestController {
 
     @GetMapping("/pool2")
     public String pool2(@RequestParam String keyword){
-        return customKoreanAnalyzerUtil.getText(keyword).stream().collect(Collectors.joining(","));
+        String result = customKoreanAnalyzerUtil.getText(keyword).stream().collect(Collectors.joining(","));
+        log.debug("pool2 keyword={}, result={}", result);
+        return result;
     }
 }

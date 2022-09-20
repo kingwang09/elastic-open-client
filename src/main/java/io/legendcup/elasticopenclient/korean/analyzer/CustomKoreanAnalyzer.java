@@ -77,16 +77,17 @@ public class CustomKoreanAnalyzer {
         if (value == null) {
             return new ArrayList<>();
         }
-        log.debug("start korean text..");
-        long start = System.currentTimeMillis();
         List<String> result = new LinkedList<>();
         try {
             TokenStream tokenStream = this.koreanAnalyzer.tokenStream("result", value);
             tokenStream.reset();
+            result.add(value);
             while (tokenStream.incrementToken()) {
                 CharTermAttribute termAttr = tokenStream.getAttribute(CharTermAttribute.class);
                 String term = termAttr + "";
-                result.add(term);
+                if(!value.equalsIgnoreCase(term) && term.length() > 1) {//keyword와ㅗ 동일하지 않고, 한글자 이상인 경우만 추가
+                    result.add(term);
+                }
 
 //                Set<String> retSet = this.getSynonym(termAttr + "");
 //                if (retSet.size() != 0) {
@@ -101,14 +102,14 @@ public class CustomKoreanAnalyzer {
         } catch (IOException e) {
             log.error("token error: {}", e.getMessage(), e);
         }
-        long end = System.currentTimeMillis();
-        log.debug("end korean text: {}ms", (end-start));
         return result;
     }
 
     public void close(){
         try {
-            koreanAnalyzer.close();
+            if(koreanAnalyzer != null) {
+                koreanAnalyzer.close();
+            }
         }catch (Exception ex){
             log.error("custom korean analyzer close fail..{}", ex.getMessage(), ex);
         }

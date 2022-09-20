@@ -1,11 +1,13 @@
 server:
-  port: 9090
+  port: 9990
 analyzer:
   compound-path: dictionary.dic
   compound-classpath: classpath:dictionary.dic
   synonyms-path: synonym.dic
   synonyms-classpath: classpath:synonym.dic
 spring:
+  application:
+    name: elastic-spring-example
   batch:
     job:
       enabled: false
@@ -16,6 +18,14 @@ batch:
     writer:
       path: "/Users/hyungeun.jin/Documents/csv/company_out.txt"
   chunk-size: 1000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus"
+  metrics:
+    tags:
+      application: ${spring.application.name}
 logging:
   level:
     io.legendcup: DEBUG

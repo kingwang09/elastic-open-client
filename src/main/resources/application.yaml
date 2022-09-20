@@ -10,14 +10,21 @@ spring:
     name: elastic-spring-example
   batch:
     job:
-      enabled: false
+      enabled: true
 batch:
   csv:
-    reader:
-      path: "/Users/hyungeun.jin/Documents/csv/company.txt"
-    writer:
-      path: "/Users/hyungeun.jin/Documents/csv/company_out.txt"
-  chunk-size: 1000
+    import:
+      reader:
+        path: "/Users/hyungeun.jin/Documents/csv/company.txt"
+      writer:
+        path: "/Users/hyungeun.jin/Documents/csv/company_out.txt"
+      chunk-size: 1000
+    converter:
+      reader:
+        path: "/Users/hyungeun.jin/Documents/csv/convertTarget.csv"
+      writer:
+        path: "/Users/hyungeun.jin/Documents/csv/convert.csv"
+      chunk-size: 5000
 management:
   endpoints:
     web:

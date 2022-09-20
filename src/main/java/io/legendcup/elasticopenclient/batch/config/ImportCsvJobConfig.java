@@ -30,38 +30,38 @@ import java.util.List;
 @RequiredArgsConstructor
 @EnableBatchProcessing
 @Configuration
-public class CsvJobConfig {
-    @Value("${batch.csv.reader.path}")
+public class ImportCsvJobConfig {
+    @Value("${batch.csv.import.reader.path}")
     private String csvReaderPath;
-    @Value("${batch.csv.writer.path}")
+    @Value("${batch.csv.import.writer.path}")
     private String csvWriterPath;
-    @Value("${batch.chunk-size}")
+    @Value("${batch.csv.import.chunk-size}")
     private Integer chunkSize;
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    @Bean
-    public Job basicJob(){
-        return jobBuilderFactory.get("basicJob")
-                .start(companyStep())
+    //@Bean
+    public Job importJob(){
+        return jobBuilderFactory.get("importJob")
+                .start(importStep())
                 .build();
     }
 
     @Bean
-    public Step companyStep(){
-        return stepBuilderFactory.get("companyStep")
+    public Step importStep(){
+        return stepBuilderFactory.get("importStep")
                 .<RawSampleCompany,SampleCompany>chunk(chunkSize)
-                .reader(csvFileReader())
-                .processor(csvProcessor())
+                .reader(importCsvFileReader())
+                .processor(importProcessor())
                 //.writer(csvFileWriter())
-                //.writer(logWriter())
+                //.writer(importLogWriter())
                 .writer(elasticWriter())
                 .build();
     }
 
     @Bean
-    public FlatFileItemReader<RawSampleCompany> csvFileReader(){
+    public FlatFileItemReader<RawSampleCompany> importCsvFileReader(){
         String[] fields = getFields(RawSampleCompany.class);
         return new FlatFileItemReaderBuilder<RawSampleCompany>()
                 .name("csvFileReader")
@@ -91,7 +91,7 @@ public class CsvJobConfig {
     }
 
     @Bean
-    public CsvProcessor csvProcessor(){
+    public CsvProcessor importProcessor(){
         return new CsvProcessor();
     }
 
@@ -109,7 +109,7 @@ public class CsvJobConfig {
     }
 
     @Bean
-    public ItemWriter<RawSampleCompany> logWriter() {
+    public ItemWriter<RawSampleCompany> importLogWriter() {
         return list -> {
             for (RawSampleCompany result: list) {
                 log.info("complete log={}", result);

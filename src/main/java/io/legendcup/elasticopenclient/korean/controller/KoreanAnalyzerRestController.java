@@ -25,7 +25,9 @@ public class KoreanAnalyzerRestController {
 
     @GetMapping
     public String get(@RequestParam String keyword){
-        return originalCustomKoreanAnalyzer.makeUniGramText(keyword);
+        String result = originalCustomKoreanAnalyzer.makeUniGramText(keyword);
+        log.debug("original keyword={}, result={}", keyword, result);
+        return result;
     }
 
     @GetMapping("/pool")
@@ -36,7 +38,7 @@ public class KoreanAnalyzerRestController {
     @GetMapping("/pool2")
     public String pool2(@RequestParam String keyword){
         String result = customKoreanAnalyzerUtil.getText(keyword).stream().collect(Collectors.joining(","));
-        log.debug("pool2 keyword={}, result={}", result);
+        log.debug("pool2 keyword={}, result={}", keyword, result);
         return result;
     }
 }

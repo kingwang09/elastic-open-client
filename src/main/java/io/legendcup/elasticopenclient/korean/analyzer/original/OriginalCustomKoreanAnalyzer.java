@@ -204,7 +204,9 @@ public class OriginalCustomKoreanAnalyzer {
     public List<String> getUniGramToken(String text) {
         long start = System.currentTimeMillis();
         List<String> list = new ArrayList<String>();
+        NGramTokenizer uniGramTokenizer = null;
         try {
+            uniGramTokenizer = new NGramTokenizer(1, 1);
             CharTermAttribute charTermAttribute = uniGramTokenizer.addAttribute(CharTermAttribute.class);
             uniGramTokenizer.setReader(new StringReader(text));
             uniGramTokenizer.reset();
@@ -212,11 +214,17 @@ public class OriginalCustomKoreanAnalyzer {
                 list.add(charTermAttribute.toString());
             }
             uniGramTokenizer.end();
-            uniGramTokenizer.close();
         } catch (Exception e) {
             log.warn(String.format("Failure in creating tokens (%s)", text), e);
-            //list = Arrays.stream(text.split("")).filter(StringUtils::isNotBlank).collect(Collectors.toList());
             throw new RuntimeException(e.getMessage());
+        } finally{
+            try {
+                if(uniGramTokenizer != null) {
+                    uniGramTokenizer.close();
+                }
+            } catch (IOException e) {
+                log.warn("original unigram Tokenizer close fail: {}", e.getMessage(), e);
+            }
         }
         long end = System.currentTimeMillis();
         log.debug("time: {}ms",(end-start));

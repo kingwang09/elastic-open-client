@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
+//git history가 개인계정으로 남도록
 @Slf4j
 @SpringBootTest
 public class ElasticHighLevelClientTest {

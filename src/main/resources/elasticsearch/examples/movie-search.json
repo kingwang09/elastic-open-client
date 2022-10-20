@@ -27,8 +27,7 @@
         }
       },
       "showDate" : {
-        "type": "date",
-        "format": "yyyy-MM-dd HH:mm:ss"
+        "type": "date"
       },
       "productRange": { "type": "date_range" },
       "filmLocation": { "type": "geo_point"},

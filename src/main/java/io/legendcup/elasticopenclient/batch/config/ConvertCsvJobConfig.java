@@ -26,6 +26,7 @@ import org.springframework.core.io.FileSystemResource;
 import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -42,7 +43,7 @@ public class ConvertCsvJobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    @Bean
+    //@Bean
     public Job convertCsvJob(){
         return jobBuilderFactory.get("convertCsvJob")
                 .start(convertCsvStep())
@@ -91,9 +92,8 @@ public class ConvertCsvJobConfig {
     @Bean
     public ItemWriter<ConvertCsv> convertCsvLogWriter() {
         return list -> {
-            for (ConvertCsv result: list) {
-                log.info("convert result={}", result);
-            }
+            String result = list.stream().map((v)->"'"+v.getV1()+"'").collect(Collectors.joining(","));
+            log.debug("result: {}", result);
         };
     }
 }

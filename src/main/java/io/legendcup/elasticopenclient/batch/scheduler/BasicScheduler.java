@@ -25,7 +25,7 @@ public class BasicScheduler {
     private final BasicJobConfig basicJobConfig;
 
 
-    @Scheduled(cron = "30 * * * * *")
+    //@Scheduled(cron = "30 * * * * *")
     public void runBasicJob(){
         Map<String, JobParameter> parameterMap = new HashMap<>();
         parameterMap.put("time", new JobParameter(System.currentTimeMillis()));

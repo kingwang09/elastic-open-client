@@ -1,0 +1,39 @@
+/*PUT http://localhost:9200/movie_search/_doc/1*/
+{
+"movieCode": "KORM1",
+"movieName": "공조2-인터내셔날",
+"playtime(min)": 129,
+"companies" : [
+{
+"companyCode": "JK-Film",
+"companyName": "JK 필름"
+},
+{
+"companyCode": "CJ-ENM",
+"companyName": "CJ 엔터테인먼트"
+}
+],
+"directors": {
+"peopleName": "이석훈"
+},
+"isDeleted" : false,
+"movieComment": "새로운 임무, 하나의팀 짜릿한 공조가 시작된다.",
+"subtitleLang" : ["ko", "en", "tw"],
+"showDate": "2022-09-07 00:00:00",
+"productRange" : {
+"gte": "2021-02-16",
+"lte": "2021-06-15"
+},
+"filmLocation": {
+"lat": 37.57334891053256,
+"lon": 126.98993648059485
+},
+"ipAddress": "127.0.0.1",
+"actors": [
+{"name":"현빈"},
+{"name":"유해진"},
+{"name":"임윤아"},
+{"name":"다니엘 헤니"},
+{"name":"진선규"}
+]
+}

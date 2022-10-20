@@ -29,7 +29,7 @@ public class ElasticHighLevelClientTest {
 
     @Test
     public void test() throws IOException {
-        SearchRequest searchRequest = new SearchRequest("movie_search");
+        SearchRequest searchRequest = new SearchRequest("movie_search_sample");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
         searchRequest.source(searchSourceBuilder);

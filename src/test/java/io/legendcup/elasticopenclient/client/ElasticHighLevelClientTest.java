@@ -7,6 +7,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -33,6 +34,30 @@ public class ElasticHighLevelClientTest {
         SearchRequest searchRequest = new SearchRequest("movie_search_sample");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+        searchRequest.source(searchSourceBuilder);
+
+        //search execute
+        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+
+        //search response
+        SearchHits hits = searchResponse.getHits();
+        SearchHit[] searchHits = hits.getHits();
+        for (SearchHit hit : searchHits) {
+            // do something with the SearchHit
+            MovieSearch data = objectMapper.convertValue(hit.getSourceAsMap(), MovieSearch.class);
+            log.debug("data: {}", data);
+        }
+    }
+
+    @Test
+    public void movieTest() throws IOException {
+        SearchRequest searchRequest = new SearchRequest("movie_search");
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+        queryBuilder.filter(QueryBuilders.termQuery("movieNm", "곤지암"));
+
+        searchSourceBuilder.query(queryBuilder);
         searchRequest.source(searchSourceBuilder);
 
         //search execute

@@ -48,7 +48,7 @@ public class ImportCsvJobConfig {
                 .build();
     }
 
-    @Bean
+    //@Bean
     public Step importStep(){
         return stepBuilderFactory.get("importStep")
                 .<RawSampleCompany,SampleCompany>chunk(chunkSize)
@@ -60,7 +60,7 @@ public class ImportCsvJobConfig {
                 .build();
     }
 
-    @Bean
+    //@Bean
     public FlatFileItemReader<RawSampleCompany> importCsvFileReader(){
         String[] fields = getFields(RawSampleCompany.class);
         return new FlatFileItemReaderBuilder<RawSampleCompany>()
@@ -90,12 +90,12 @@ public class ImportCsvJobConfig {
         return result;
     }
 
-    @Bean
+    //@Bean
     public CsvProcessor importProcessor(){
         return new CsvProcessor();
     }
 
-    @Bean
+    //@Bean
     public FlatFileItemWriter<RawSampleCompany> csvFileWriter(){
         String[] fields = getFields(RawSampleCompany.class);
         return new FlatFileItemWriterBuilder<RawSampleCompany>()
@@ -108,7 +108,7 @@ public class ImportCsvJobConfig {
                 .build();
     }
 
-    @Bean
+    //@Bean
     public ItemWriter<RawSampleCompany> importLogWriter() {
         return list -> {
             for (RawSampleCompany result: list) {
@@ -117,7 +117,7 @@ public class ImportCsvJobConfig {
         };
     }
 
-    @Bean
+    //@Bean
     public ItemWriter<SampleCompany> elasticWriter(){
         return new ElasticWriter();
     }

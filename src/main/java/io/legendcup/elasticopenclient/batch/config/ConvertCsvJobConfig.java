@@ -50,7 +50,7 @@ public class ConvertCsvJobConfig {
                 .build();
     }
 
-    @Bean
+    //@Bean
     public Step convertCsvStep(){
         return stepBuilderFactory.get("convertCsvStep")
                 .<ConvertCsv,ConvertCsv>chunk(chunkSize)
@@ -59,7 +59,7 @@ public class ConvertCsvJobConfig {
                 .build();
     }
 
-    @Bean
+    //@Bean
     public FlatFileItemReader<ConvertCsv> convertCsvFileReader(){
         String[] fields = getFields(ConvertCsv.class);
         return new FlatFileItemReaderBuilder<ConvertCsv>()
@@ -89,7 +89,7 @@ public class ConvertCsvJobConfig {
         return result;
     }
 
-    @Bean
+    //@Bean
     public ItemWriter<ConvertCsv> convertCsvLogWriter() {
         return list -> {
             String result = list.stream().map((v)->"'"+v.getV1()+"'").collect(Collectors.joining(","));

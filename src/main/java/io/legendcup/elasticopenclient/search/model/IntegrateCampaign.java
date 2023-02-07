@@ -18,4 +18,9 @@ public class IntegrateCampaign {
     private String campaignStatus;
 
     private String hashTagsForSearch;
+
+    private String titleUniGram;
+    private String makerUniGram;
+    private String hashTagUniGram;
+    private String coreMessageUniGram;
 }

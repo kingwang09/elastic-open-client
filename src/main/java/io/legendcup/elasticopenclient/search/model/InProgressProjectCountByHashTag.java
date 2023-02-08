@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(indexName = "hashtag-inprogress-project-count", createIndex = true, dynamic = Dynamic.TRUE)
+@Document(indexName = "hashtag-project-count", createIndex = true, dynamic = Dynamic.TRUE)
 public class InProgressProjectCountByHashTag {
     @Id
     private String id;
